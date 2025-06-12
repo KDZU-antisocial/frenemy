@@ -1,4 +1,6 @@
-# 🚲 Bike Assembly Voice Assistant
+# FRENEMY
+
+F.renemy R.econnaissance E.xplorer N.avigating E.nvironments, M.alfunctioning & Y.elling
 
 An interactive voice-based assistant that guides users through bike assembly using AI-powered speech recognition and natural language processing.
 
