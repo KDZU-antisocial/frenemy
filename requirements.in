@@ -1,0 +1,7 @@
+whisper
+TTS
+sounddevice
+numpy
+pyttsx3
+langchain
+langchain-community 
