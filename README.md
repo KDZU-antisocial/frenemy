@@ -97,8 +97,9 @@ This project uses `pip-tools` for dependency management. Here's how to use it:
 
 2. Update requirements.txt:
    ```bash
-   pip-compile requirements.in
+   pip-compile --allow-unsafe requirements.in
    ```
+   Note: The `--allow-unsafe` flag is required because some packages (like `setuptools`) are marked as unsafe but are necessary build dependencies.
 
 3. Install dependencies:
    ```bash
@@ -108,7 +109,7 @@ This project uses `pip-tools` for dependency management. Here's how to use it:
 To add a new dependency:
 
 1. Add it to `requirements.in`
-2. Run `pip-compile requirements.in`
+2. Run `pip-compile --allow-unsafe requirements.in`
 3. Run `pip-sync requirements.txt`
 
 ### Usage

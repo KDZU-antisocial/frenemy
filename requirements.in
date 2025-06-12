@@ -1,7 +1,11 @@
+# Core dependencies
 whisper
 TTS
 sounddevice
 numpy
 pyttsx3
 langchain
-langchain-community 
+langchain-community
+
+# Build dependencies (required for installation)
+setuptools>=68.0.0  # Required for building packages 
