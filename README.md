@@ -46,23 +46,27 @@ An interactive voice-based assistant that guides users through bike assembly usi
 [uv][uv-link] is a fast Python package installer and resolver.
 
 1. Install uv:
+
    ```bash
    curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
 2. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/frenemy.git
    cd frenemy
    ```
 
 3. Create and activate virtual environment:
+
    ```bash
    uv venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
 4. Install dependencies:
+
    ```bash
    uv pip install -r requirements.txt
    ```
@@ -70,18 +74,21 @@ An interactive voice-based assistant that guides users through bike assembly usi
 #### Using pip (Traditional Method)
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/frenemy.git
    cd frenemy
    ```
 
 2. Create and activate virtual environment:
+
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
 3. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -91,17 +98,20 @@ An interactive voice-based assistant that guides users through bike assembly usi
 This project uses `pip-tools` for dependency management. Here's how to use it:
 
 1. Install pip-tools:
+
    ```bash
    pip install pip-tools
    ```
 
 2. Update requirements.txt:
+
    ```bash
    pip-compile --allow-unsafe requirements.in
    ```
    Note: The `--allow-unsafe` flag is required because some packages (like `setuptools`) are marked as unsafe but are necessary build dependencies.
 
 3. Install dependencies:
+
    ```bash
    pip-sync requirements.txt
    ```
@@ -115,6 +125,7 @@ To add a new dependency:
 ### Usage
 
 1. Start the assistant:
+
    ```bash
    python main.py
    ```
