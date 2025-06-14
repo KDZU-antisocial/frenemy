@@ -8,8 +8,9 @@ import tempfile
 import pyttsx3
 
 from langchain.llms import Ollama
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
+from langchain_core.runnables import RunnableWithMessageHistory
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 # === AUDIO CONFIG ===
 samplerate = 16000
@@ -65,19 +66,27 @@ state = {"step": 0}
 
 # === LANGCHAIN WITH OLLAMA ===
 llm = Ollama(model="llama3")
-memory = ConversationBufferMemory()
-chat_chain = ConversationChain(llm=llm, memory=memory)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a funny and helpful rover-assembly assistant. You're helping a user through step-by-step instructions."),
+    MessagesPlaceholder(variable_name="history"),
+    ("human", "{input}")
+])
+
+chain = prompt | llm
+chat_chain = RunnableWithMessageHistory(
+    chain,
+    lambda session_id: [],  # Simple in-memory history
+    input_messages_key="input",
+    history_messages_key="history"
+)
 
 def get_funny_response(user_input):
     current_step = steps[state["step"]]
-    prompt = f"""
-You are a funny and helpful rover-assembly assistant. You're helping a user through step-by-step instructions.
-Current step: {current_step}.
-User said: "{user_input}"
-
-Respond with humor and emotional intelligence. If user is skipping steps or frustrated, acknowledge it and steer them back.
-"""
-    return chat_chain.predict(input=prompt)
+    response = chat_chain.invoke(
+        {"input": f"Current step: {current_step}. User said: {user_input}"},
+        config={"configurable": {"session_id": "user_session"}}
+    )
+    return response.content
 
 # === MAIN INTERACTION LOOP ===
 def run_assistant():
