@@ -43,13 +43,39 @@ def transcribe_audio(audio_path):
 # Load once globally for performance
 coqui_tts = CoquiTTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")
 
+def split_text(text, max_length=200):
+    """Split text into smaller chunks for TTS processing."""
+    words = text.split()
+    chunks = []
+    current_chunk = []
+    current_length = 0
+    
+    for word in words:
+        if current_length + len(word) + 1 > max_length:
+            chunks.append(" ".join(current_chunk))
+            current_chunk = [word]
+            current_length = len(word)
+        else:
+            current_chunk.append(word)
+            current_length += len(word) + 1
+    
+    if current_chunk:
+        chunks.append(" ".join(current_chunk))
+    
+    return chunks
+
 def speak(text):
     print(f"🤖 Assistant: {text}")
-    # Generate waveform
-    audio = coqui_tts.tts(text)
-    # Play audio
-    sd.play(audio, samplerate=22050)
-    sd.wait()
+    # Split text into smaller chunks
+    chunks = split_text(text)
+    
+    # Process each chunk
+    for chunk in chunks:
+        # Generate waveform
+        audio = coqui_tts.tts(chunk)
+        # Play audio
+        sd.play(audio, samplerate=22050)
+        sd.wait()
 
 # === ROVER ASSEMBLY STEPS ===
 steps = [
