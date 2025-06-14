@@ -108,6 +108,7 @@ This project uses `pip-tools` for dependency management. Here's how to use it:
    ```bash
    pip-compile --allow-unsafe requirements.in
    ```
+
    Note: The `--allow-unsafe` flag is required because some packages (like `setuptools`) are marked as unsafe but are necessary build dependencies.
 
 3. Install dependencies:

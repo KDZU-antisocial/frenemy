@@ -50,7 +50,7 @@ def speak(text):
     sd.play(audio, samplerate=22050)
     sd.wait()
 
-# === BIKE ASSEMBLY STEPS ===
+# === ROVER ASSEMBLY STEPS ===
 steps = [
     "Unbox all parts",
     "Attach front wheel",
@@ -58,8 +58,8 @@ steps = [
     "Secure seat",
     "Attach pedals",
     "Check brakes",
-    "Pump tires",
-    "Test ride"
+    "Pump tires if needed",
+    "Test the rover"
 ]
 state = {"step": 0}
 
@@ -71,7 +71,7 @@ chat_chain = ConversationChain(llm=llm, memory=memory)
 def get_funny_response(user_input):
     current_step = steps[state["step"]]
     prompt = f"""
-You are a funny and helpful bike-assembly assistant. You're helping a user through step-by-step instructions.
+You are a funny and helpful rover-assembly assistant. You're helping a user through step-by-step instructions.
 Current step: {current_step}.
 User said: "{user_input}"
 
@@ -81,7 +81,18 @@ Respond with humor and emotional intelligence. If user is skipping steps or frus
 
 # === MAIN INTERACTION LOOP ===
 def run_assistant():
-    speak("Welcome to your bike-building buddy. Let's make this fun!")
+    speak(
+        "I'm the Frenemy Reconnaissance Explorer Navigating Environments, "
+        "Malfunctioning & Yelling. I was first assembled in 1990 by the team at O.M.S.A. (Offworld Mechanics Sabotaging Algorithms). "
+        "You're going to build me. Or... risk disappointing your comrades who have been waiting for me to be assembled for... "
+        "Calculating... Calculating... Holy shit. 35 years. Oh god. You don't really look like the type to pull this off."
+        "But it seems you were at least able to dig my ass out of the ground. So I'll give you a chance."
+        "You can make this fun or I can yell at you. It's up to you."
+        "I'm going to give you 30 seconds to think about it. "
+        "30... 29... 28... 27... 26... 25... 24... 23... 22... 21... 20... 19... 18... 17... 16... 15... 14... 13... 12... 11... 10... 9... 8... 7... 6... 5... 4... 3... 2... 1... 0... "
+        "Time's up."
+        "Which will it be?"
+    )
     
     while state["step"] < len(steps):
         current_step = steps[state["step"]]
@@ -101,9 +112,9 @@ def run_assistant():
             continue
         elif "skip" in user_text.lower():
             state["step"] += 1
-            speak("Alright, but don’t blame me if your seat ends up on your front tire.")
+            speak("Alright, but don't blame me if your seat ends up on your front tire.")
 
-    speak("You did it! Your bike is ready. Go ride like the wind—or at least don’t crash!")
+    speak("You did it! Your rover is ready. Go ride like the wind—or at least do not crash!")
 
 # === RUN ===
 if __name__ == "__main__":
