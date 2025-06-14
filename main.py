@@ -127,13 +127,13 @@ def run_assistant():
         "But it seems you were at least able to dig my ass out of the ground. So I'll give "
         "you a chance. "
         "You can make this fun or I can yell at you. It's up to you. "
-        "I'm going to give you 30 seconds to think about it. "
-        "30... 29... 28... 27... 26... 25... 24... 23... 22... 21... 20... 19... 18... "
-        "17... 16... 15... 14... 13... 12... 11... 10... 9... 8... 7... 6... 5... 4... "
-        "3... 2... 1... 0... "
-        "Time's up. "
-        "Which will it be?"
+        "I'm going to give you 30 seconds to think about it."
     )
+    
+    # Countdown in larger chunks
+    countdown = "30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0"
+    speak(countdown)
+    speak("Time's up. Which will it be?")
     
     while state["step"] < len(steps):
         current_step = steps[state["step"]]
